@@ -60,7 +60,7 @@ function App() {
         originalUrl,
         customAlias
       });
-      setShortUrl(response.data.shortUrl);
+      setShortUrl(`${window.location.origin}/${response.data.shortCode || response.data.shortUrl}`);
     } catch (err) {
       const errorMsg = err.response?.data?.error || 'Catastrophe! Failed to shorten URL.';
       setError(`💥 ${errorMsg}`);
