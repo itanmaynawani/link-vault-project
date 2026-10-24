@@ -3,6 +3,7 @@ import axios from 'axios';
 import { QRCodeSVG } from 'qrcode.react';
 import './App.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://link-vault-project.onrender.com';
 const funnyQuotes = [
   "🧠 Consulting Albert Einstein to compress space-time into a micro-URL...",
   "📐 Applying the Pythagorean theorem to straighten your chaotic link...",
@@ -55,7 +56,7 @@ function App() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
-      const response = await axios.post('http://localhost:5000/api/shorten', {
+      const response = await axios.post(`${API_URL}/api/shorten`, {
         originalUrl,
         customAlias
       });
@@ -76,7 +77,7 @@ function App() {
 
   const fetchAnalytics = async (code) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/analytics/${code}`);
+      const response = await axios.get(`${API_URL}/api/analytics/${code}`);
       setAnalytics(response.data);
       const randomQuote = analyticsQuotes[Math.floor(Math.random() * analyticsQuotes.length)];
       setCurrentAnalyticsQuote(randomQuote);
